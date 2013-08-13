@@ -11,6 +11,7 @@ Requires PHP and curl.
 Example installation of PHP on Linux:
 
 $ sudo apt-get install php5
+
 $ sudo apt-get install php5-curl
 
 Usage
