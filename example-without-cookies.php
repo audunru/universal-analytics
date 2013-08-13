@@ -52,6 +52,8 @@ while ($string = trim (fgets (STDIN))) {
 		'dh' => 'localhost',
 		't' => 'pageview',
 		'dp' => '/store'));
+		
+	echo 'Tracked pageview for ' . $cid . "\n";
 }
 
 ?>
