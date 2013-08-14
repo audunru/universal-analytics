@@ -37,23 +37,24 @@ while ($string = trim (fgets (STDIN))) {
 		$cid);
 
 	/*
-	* Track pageview
-	* 'dh' is not required, but tracking pageviews doesn't work without a host, see
-	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t
+	* Track event
 	*
 	* 't' is a required parameter, see
 	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t
 	*
-	* 'dp' is the document path, see
-	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp
+	* 'ec' is the event category, seee
+	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec
+	*
+	* 'ea' is the event action, seee
+	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea
 	*/
 
 	$ua->track (array (
-		'dh' => 'localhost',
-		't' => 'pageview',
-		'dp' => '/store'));
+		't' => 'event',
+		'ec' => 'Store',
+		'ea' => 'Entry/Exit'));
 		
-	echo 'Tracked pageview for ' . $cid . "\n";
+	echo 'Tracked event for ' . $cid . "\n";
 }
 
 ?>
