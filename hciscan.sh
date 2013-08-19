@@ -4,4 +4,5 @@
 while :
 do
   hcitool scan --flush
+  sleep 15
 done
