@@ -16,7 +16,7 @@ require ('class.universalAnalytics.php');
 require ('class.uuidv4.php');
 
 // Tracking ID (required)
-$tid = 'UA-114193-17';
+$tid = 'UA-20250367-2';
 
 while ($string = trim (fgets (STDIN))) {
 
