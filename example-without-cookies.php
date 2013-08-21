@@ -42,19 +42,19 @@ while ($string = trim (fgets (STDIN))) {
 	* 't' is a required parameter, see
 	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t
 	*
-	* 'ec' is the event category, seee
-	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec
+	* 'dh' is the host, see
+	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh
 	*
-	* 'ea' is the event action, seee
-	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea
+	* 'dp' is the page path, see
+	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp
 	*/
 
 	$ua->track (array (
-		't' => 'event',
-		'ec' => 'Store',
-		'ea' => 'Entry/Exit'));
+		't' => 'pageview',
+		'dh' => 'localhost',
+		'dp' => 'entry-exit'));
 		
-	echo 'Tracked event for ' . $cid . "\n";
+	echo 'Tracked pageview for ' . $cid . "\n";
 }
 
 ?>
