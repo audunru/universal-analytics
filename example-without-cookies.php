@@ -16,7 +16,7 @@ require ('class.universalAnalytics.php');
 require ('class.uuidv4.php');
 
 // Tracking ID (required)
-$tid = 'UA-20250367-2';
+$tid = 'UA-20250367-3';
 
 while ($string = trim (fgets (STDIN))) {
 
@@ -37,7 +37,7 @@ while ($string = trim (fgets (STDIN))) {
 		$cid);
 
 	/*
-	* Track event
+	* Track pageview
 	*
 	* 't' is a required parameter, see
 	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t
@@ -52,7 +52,7 @@ while ($string = trim (fgets (STDIN))) {
 	$ua->track (array (
 		't' => 'pageview',
 		'dh' => 'localhost',
-		'dp' => 'entry-exit'));
+		'dp' => '/~audun/nettbutikk/kvittering'));
 		
 	echo 'Tracked pageview for ' . $cid . "\n";
 }
