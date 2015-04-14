@@ -53,9 +53,23 @@ while ($string = trim (fgets (STDIN))) {
 		't' => 'pageview',
 		'dh' => 'localhost',
 		'dp' => '/butikker/hamar/kvittering',
-    'uid' => $string));
-		
-	echo 'Tracked pageview for Client ID ' . $cid . ' and User ID ' . $string . "\n";
+    'uid' => $string,
+    'cs' => 'Hamar',
+    'cm' => 'offline',
+    'pa' => 'purchase', // Enhanced Ecommerce Action
+    'ti' => rand(), // Transaction ID
+    'ta' => 'Hamar', // Name of store
+    'tr' => 200, // Revenue
+    'tt' => 0, // Tax
+    'ts' => 0, // Shipping
+    'pr1nm' => 'Banan', // Product name
+    'pr1id' => 2437694, // Product ID
+    'pr1pr' => 200, // Product price
+    'pr1br' => 'BAMA', // Product Brand
+    'pr1ca' => 'Frukt og grønnsaker/Frukt', // Product Category
+    'pr1va' => 'Vanlig', // Product Variant
+    'pr1qt' => 1)); // Product Quantity
+    echo 'Tracked pageview for Client ID ' . $cid . ' and User ID ' . $string . "\n";
 }
 
 ?>
