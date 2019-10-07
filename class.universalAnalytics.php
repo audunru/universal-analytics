@@ -13,14 +13,13 @@ class universalAnalytics
     protected $version = '1';
     protected $url = 'http://www.google-analytics.com/collect';
 
-    /*
-    * Inital setup of the tracking info to be submitted to Google
-    * "tid" is the Universal Analytics tracking ID, i.e. UA-XXXXX-X
-    * "cid" is the Client ID, which can be part of the cookie
-    * "useServer" indicates if we should use $_SERVER to set the
-    * host, path and referer parameters
-    */
-
+    /**
+     * Inital setup of the tracking info to be submitted to Google.
+     *
+     * @param string $tid       The Universal Analytics tracking ID, i.e. UA-XXXXX-X
+     * @param string $cid       The Client ID, which can be part of the cookie
+     * @param bool   $useServer Indicates if we should use $_SERVER to set the host, path and referer parameters
+     */
     public function __construct($tid, $cid, $useServer = false)
     {
         // Version (required)
@@ -47,13 +46,14 @@ class universalAnalytics
         }
     }
 
-    /*
-    * Track the event/pageview
-    * "parameters" is an array of parameters and values that will be sent to Google
-    * The minimum requirement is to supply the "Hit type" parameter, i.e. array ('t' => 'pageview')
-    * See https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t
-    */
-
+    /**
+     * Track the event/pageview.
+     *
+     * The minimum requirement is to supply the "Hit type" parameter, i.e. array ('t' => 'pageview')
+     * See https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t
+     *
+     * @param array $parameters Values that will be sent to Google
+     */
     public function track($parameters)
     {
         try {
