@@ -10,8 +10,8 @@
 * https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
 */
 
-require ('class.universalAnalyticsCookie.php');
-require ('class.universalAnalytics.php');
+require 'class.universalAnalyticsCookie.php';
+require 'class.universalAnalytics.php';
 
 // Tracking ID (required)
 $tid = 'UA-20250367-2';
@@ -26,20 +26,18 @@ $tid = 'UA-20250367-2';
 * tracking is being used.
 */
 
-$cookie = new universalAnalyticsCookie ();
-if (!$cid = $cookie->getCid ()) {
-
-	$cid = $cookie->set ();
-
+$cookie = new universalAnalyticsCookie();
+if (! $cid = $cookie->getCid()) {
+    $cid = $cookie->set();
 }
 
 // Use $_SERVER variables for host, path and referer
 $useServer = true;
 
-$ua = new universalAnalytics (
-	$tid,
-	$cid,
-	$useServer);
+$ua = new universalAnalytics(
+    $tid,
+    $cid,
+    $useServer);
 
 /*
 * Track pageview
@@ -51,9 +49,9 @@ $ua = new universalAnalytics (
 * https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp
 */
 
-$ua->track (array (
-	't' => 'pageview',
-	'dp' => '/example'));
+$ua->track([
+    't'  => 'pageview',
+    'dp' => '/example', ]);
 
 /*
 * Track event
@@ -65,8 +63,7 @@ $ua->track (array (
 * https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea
 */
 
-$ua->track (array (
-	't' => 'event',
-	'ec' => 'Download',
-	'ea' => '/files/example.pdf'));
-?>
+$ua->track([
+    't'  => 'event',
+    'ec' => 'Download',
+    'ea' => '/files/example.pdf', ]);

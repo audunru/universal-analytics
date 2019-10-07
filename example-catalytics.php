@@ -10,7 +10,7 @@
 // $ cat /dev/ttyUSB0 | php example-catalytics.php
 // Replace ttyUSB0 with your device
 
-require ('class.universalAnalytics.php');
+require 'class.universalAnalytics.php';
 
 // Tracking ID
 $tid = 'UA-20250367-4';
@@ -26,37 +26,29 @@ $ea = 'Foodbowl';
 * Since the RFID reader continues to scan the RFID tag as long as it's within
 * range, we have to
 */
-$timestamp = array ();
+$timestamp = [];
 
 // Wait this long between tracking each RFID tag
-$wait = 60*5;
+$wait = 60 * 5;
 
 // Read RFID tag from STDIN and track the pageview
-while ($cid = trim (fgets (STDIN))) {
+while ($cid = trim(fgets(STDIN))) {
+    // Only track the pageview if the timestamp for the $cid has expired
+    if (! isset($timestamp[$cid]) or $timestamp[$cid] + $wait < time()) {
+        // Track the pageview
+        $ua = new universalAnalytics(
+            $tid,
+            $cid);
 
-	// Only track the pageview if the timestamp for the $cid has expired
-	if (!isset ($timestamp[$cid]) or $timestamp[$cid] + $wait < time ()) {
+        $ua->track([
+            't'  => 'event',
+            'ec' => $ec,
+            'ea' => $ea, ]);
 
-		// Track the pageview
-		$ua = new universalAnalytics (
-			$tid,
-			$cid);
+        $timestamp[$cid] = time();
 
-		$ua->track (array (
-			't' => 'event',
-			'ec' => $ec,
-			'ea' => $ea));
-
-		$timestamp[$cid] = time ();
-
-		echo "Tracked event for: $cid\n";
-
-	}
-	else {
-
-		echo "RFID scanned, but not tracked. Timeout expires " . date ('r', $timestamp[$cid] + $wait) . "\n";
-
-	}
-
+        echo "Tracked event for: $cid\n";
+    } else {
+        echo 'RFID scanned, but not tracked. Timeout expires '.date('r', $timestamp[$cid] + $wait)."\n";
+    }
 }
-?>

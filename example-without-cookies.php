@@ -12,49 +12,46 @@
 * https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
 */
 
-require ('class.universalAnalytics.php');
-require ('class.uuidv4.php');
+require 'class.universalAnalytics.php';
+require 'class.uuidv4.php';
 
 // Tracking ID (required)
 $tid = 'UA-20250367-3';
 
-while ($string = trim (fgets (STDIN))) {
+while ($string = trim(fgets(STDIN))) {
+    /*
+    * Client ID (required)
+    *
+    * Since we're not getting the Client ID from the _ga cookie, we have
+    * to generate it ourselves.
+    *
+    * Our source for the Client ID is STDIN, so whatever is read from STDIN
+    * will be turned into a Client ID by the generateFromString function
+    */
 
-	/*
-	* Client ID (required)
-	*
-	* Since we're not getting the Client ID from the _ga cookie, we have
-	* to generate it ourselves.
-	* 
-	* Our source for the Client ID is STDIN, so whatever is read from STDIN
-	* will be turned into a Client ID by the generateFromString function
-	*/
+    $cid = uuidv4::generateFromString($string);
 
-	$cid = uuidv4::generateFromString ($string);
+    $ua = new universalAnalytics(
+        $tid,
+        $cid);
 
-	$ua = new universalAnalytics (
-		$tid,
-		$cid);
+    /*
+    * Track pageview
+    *
+    * 't' is a required parameter, see
+    * https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t
+    *
+    * 'dh' is the host, see
+    * https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh
+    *
+    * 'dp' is the page path, see
+    * https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp
+    */
 
-	/*
-	* Track pageview
-	*
-	* 't' is a required parameter, see
-	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t
-	*
-	* 'dh' is the host, see
-	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh
-	*
-	* 'dp' is the page path, see
-	* https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp
-	*/
+    $ua->track([
+        't'  => 'pageview',
+        'dh' => 'localhost',
+        'dp' => '/~audun/nettbutikk/kvittering', ]);
 
-	$ua->track (array (
-		't' => 'pageview',
-		'dh' => 'localhost',
-		'dp' => '/~audun/nettbutikk/kvittering'));
-		
-	echo 'Tracked pageview for ' . $cid . "\n";
+    echo 'Tracked pageview for '.$cid."\n";
 }
-
-?>
